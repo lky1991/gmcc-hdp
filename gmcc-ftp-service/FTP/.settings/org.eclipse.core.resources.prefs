@@ -1,0 +1,5 @@
+#Wed Jun 29 15:49:07 CST 2016
+eclipse.preferences.version=1
+encoding//src/ftp.properties=UTF-8
+encoding//src/mysql.properties=UTF-8
+encoding//src/redis.properties=UTF-8

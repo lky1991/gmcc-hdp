@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ftpService.dao.ftpUserMapper">
+  <resultMap id="BaseResultMap" type="com.ftpService.model.ftpUser">
+    <id column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="userpassword" jdbcType="VARCHAR" property="userpassword" />
+    <result column="homedirectory" jdbcType="VARCHAR" property="homedirectory" />
+    <result column="enableflag" jdbcType="BIT" property="enableflag" />
+    <result column="writepermission" jdbcType="BIT" property="writepermission" />
+    <result column="idletime" jdbcType="INTEGER" property="idletime" />
+    <result column="uploadrate" jdbcType="INTEGER" property="uploadrate" />
+    <result column="downloadrate" jdbcType="INTEGER" property="downloadrate" />
+    <result column="maxloginnumber" jdbcType="INTEGER" property="maxloginnumber" />
+    <result column="maxloginperip" jdbcType="INTEGER" property="maxloginperip" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    userid, userpassword, homedirectory, enableflag, writepermission, idletime, uploadrate, 
+    downloadrate, maxloginnumber, maxloginperip
+  </sql>
+  
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from FTP_USER
+    where userid = #{userid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByHomeDirectory" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from FTP_USER
+    where homedirectory = #{homedirectory,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from FTP_USER
+    where userid = #{userid,jdbcType=VARCHAR}
+  </delete>
+  
+  
+  <insert id="insert" parameterType="com.ftpService.model.ftpUser">
+    insert into FTP_USER (userid, userpassword, homedirectory, 
+      enableflag, writepermission, idletime, 
+      uploadrate, downloadrate, maxloginnumber, 
+      maxloginperip)
+    values (#{userid,jdbcType=VARCHAR}, #{userpassword,jdbcType=VARCHAR}, #{homedirectory,jdbcType=VARCHAR}, 
+      #{enableflag,jdbcType=BIT}, #{writepermission,jdbcType=BIT}, #{idletime,jdbcType=INTEGER}, 
+      #{uploadrate,jdbcType=INTEGER}, #{downloadrate,jdbcType=INTEGER}, #{maxloginnumber,jdbcType=INTEGER}, 
+      #{maxloginperip,jdbcType=INTEGER})
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.ftpService.model.ftpUser">
+    update FTP_USER
+    set userpassword = #{userpassword,jdbcType=VARCHAR},
+      homedirectory = #{homedirectory,jdbcType=VARCHAR},
+      enableflag = #{enableflag,jdbcType=BIT},
+      writepermission = #{writepermission,jdbcType=BIT},
+      idletime = #{idletime,jdbcType=INTEGER},
+      uploadrate = #{uploadrate,jdbcType=INTEGER},
+      downloadrate = #{downloadrate,jdbcType=INTEGER},
+      maxloginnumber = #{maxloginnumber,jdbcType=INTEGER},
+      maxloginperip = #{maxloginperip,jdbcType=INTEGER}
+    where userid = #{userid,jdbcType=VARCHAR}
+  </update>
+</mapper>

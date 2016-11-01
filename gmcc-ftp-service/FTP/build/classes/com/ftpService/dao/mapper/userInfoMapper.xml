@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ftpService.dao.userInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ftpService.model.userInfo" >
+    <id column="ftp_account" property="ftpAccount" jdbcType="VARCHAR" />
+    <result column="registor_time" property="registorTime" jdbcType="TIMESTAMP" />
+    <result column="expire" property="expire" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ftp_account, registor_time, expire
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from USER_INFO
+    where ftp_account = #{ftpAccount,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from USER_INFO
+    where ftp_account = #{ftpAccount,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.ftpService.model.userInfo" >
+    insert into USER_INFO (ftp_account,expire
+      )
+    values (#{ftpAccount,jdbcType=VARCHAR}, #{expire,jdbcType=INTEGER}
+      )
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.ftpService.model.userInfo" >
+    update USER_INFO
+    set registor_time = #{registorTime,jdbcType=TIMESTAMP},
+      expire = #{expire,jdbcType=INTEGER}
+    where ftp_account = #{ftpAccount,jdbcType=VARCHAR}
+  </update>
+</mapper>
